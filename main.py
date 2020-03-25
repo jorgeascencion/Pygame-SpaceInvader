@@ -1,6 +1,5 @@
 import math
 import random
-
 import pygame
 from pygame import mixer
 
@@ -63,30 +62,24 @@ bulletX_change = 0
 bulletY_change = -5 * speed
 bullet_state = "ready"
 
-
 def show_score(x, y):
     score = font.render("Score : " + str(score_value), True, [255, 255, 255])
     screen.blit(score, [x, y])
-
 
 def game_over_text():
     over_text = over_font.render("GAME OVER", True, [0, 255, 0])
     screen.blit(over_text, [200, 250])
 
-
 def player(x, y):
     screen.blit(playerImg, [x, y])
 
-
 def enemy(x, y, j):
     screen.blit(enemyImg[j], [x, y])
-
 
 def fire_bullet(x, y):
     global bullet_state
     bullet_state = "fire"
     screen.blit(bulletImg, [x, y])
-
 
 def is_collision(xe, ye, xb, yb):
     distance = math.sqrt(math.pow((xb-xe), 2) + math.pow((yb-ye), 2))
@@ -95,14 +88,12 @@ def is_collision(xe, ye, xb, yb):
     else:
         return False
 
-
 def is_contact(xe, ye, xp, yp):
     distance = math.sqrt(math.pow((xp-xe), 2) + math.pow((yp-ye), 2))
     if distance < 21:
         return True
     else:
         return False
-
 
 # Game loop
 running = True
@@ -141,15 +132,6 @@ while running:
                 playerY_change = speed
             if event.key == pygame.K_ESCAPE:
                 running = False
-
-        if event.type == pygame.KEYUP:
-            # Stop movement
-            if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
-                print("[", playerX, ",", playerY, "]")
-                playerX_change = 0
-            if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
-                print("[", playerX, ",", playerY, "]")
-                playerY_change = 0
 
     # Update player's position
     playerX += playerX_change
